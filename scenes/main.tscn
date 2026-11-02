@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwarvenminer"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_main")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+theme_override_constants/separation = 12
+
+[node name="CashLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cash: 0"
+
+[node name="RateLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rate: 0/s"
+
+[node name="MineArea" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+text = "TAP TO MINE (or hire managers)"
+
+[node name="Shafts" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="ElevatorButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Elevator"
+
+[node name="WarehouseButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Warehouse"
+
+[node name="ManagerButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Hire Shaft Manager (needs Lv 5)"
+
+[connection signal="gui_input" from="VBox/MineArea" to="." method="_on_mine_area_gui_input"]
+[connection signal="pressed" from="VBox/ElevatorButton" to="." method="_on_elevator_button_pressed"]
+[connection signal="pressed" from="VBox/WarehouseButton" to="." method="_on_warehouse_button_pressed"]
+[connection signal="pressed" from="VBox/ManagerButton" to="." method="_on_manager_button_pressed"]
