@@ -3,6 +3,7 @@ extends Control
 @onready var cash_label: Label = $UI/CashLabel
 @onready var rate_label: Label = $UI/RateLabel
 @onready var miner: Sprite2D = $Miner
+@onready var cart: Sprite2D = $Cart
 @onready var shaft_button: Button = $UI/Buttons/UpgradeShaft
 @onready var elev_button: Button = $UI/Buttons/UpgradeElev
 @onready var ware_button: Button = $UI/Buttons/UpgradeWare
@@ -16,6 +17,7 @@ const MANAGER_NAMES = {"shafts": "Shaft", "elevator": "Elevator", "warehouse": "
 var mining_time: float = 0.0
 var is_mining: bool = true
 var tap_timer: float = 0.0
+var cart_time: float = 0.0
 
 func _ready() -> void:
 	update_ui()
@@ -30,6 +32,10 @@ func _ready() -> void:
 		var img = Image.create(128, 192, false, Image.FORMAT_RGBA8)
 		img.fill(Color(0.8, 0.6, 0.2))
 		miner.texture = ImageTexture.create_from_image(img)
+	if cart and cart.texture == null:
+		var cart_img = Image.create(96, 64, false, Image.FORMAT_RGBA8)
+		cart_img.fill(Color(0.5, 0.3, 0.1))
+		cart.texture = ImageTexture.create_from_image(cart_img)
 
 func _process(delta: float) -> void:
 	var rate = GameState.get_bottlenecked_rate()
@@ -47,6 +53,14 @@ func _process(delta: float) -> void:
 		var swing = sin(mining_time * 3.0) * 0.05
 		miner.position.y = 320 + bob
 		miner.rotation = swing
+
+	# Elevator/cart movement: oscillates vertically to simulate transport. Speed scales with elevator rate.
+	if cart:
+		cart_time += delta * (1.0 + GameState.get_elevator_rate() / 50.0)
+		var elev_offset = sin(cart_time * 2.0) * 80.0
+		cart.position.y = 350 + elev_offset
+		# Slight horizontal bob for life
+		cart.position.x = 250 + sin(cart_time * 1.5) * 10.0
 
 	update_ui()
 

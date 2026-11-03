@@ -2,6 +2,8 @@
 
 Idle Miner Tycoon-style game with a dwarven theme. Built in Godot 4.
 
+See [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md) for full status and next steps.
+
 ## Usable Art Assets
 The generated sprites are usable in Godot but are currently JPGs with checkerboard backgrounds.
 For best results (especially animation):
@@ -23,6 +25,7 @@ These are simple enough for AnimatedSprite2D (2 frames) or code-driven tweens (b
 - Main Menu
 - Mine scene with Sprite2D miner ready for animation
 - Simple mining bob / swing scaffolding in code
+- Elevator/cart movement animation
 - Core loop (shafts → elevator → warehouse)
 - Managers, idle cash, upgrades
 
@@ -33,6 +36,5 @@ These are simple enough for AnimatedSprite2D (2 frames) or code-driven tweens (b
 
 ## Next
 - Wire real AnimatedSprite2D frames
-- Elevator movement
 - More shafts visuals
 - Super Managers, etc.
