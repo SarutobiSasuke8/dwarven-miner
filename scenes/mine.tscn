@@ -26,12 +26,10 @@ offset_bottom = 600.0
 [node name="Miner" type="Sprite2D" parent="."]
 position = Vector2(400, 320)
 scale = Vector2(0.4, 0.4)
-# Assign texture = preload("res://assets/miner_idle.png") once added
 
 [node name="Cart" type="Sprite2D" parent="."]
 position = Vector2(250, 350)
 scale = Vector2(0.3, 0.3)
-# Assign cart texture
 
 [node name="UI" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,8 +37,8 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -180.0
-offset_right = 500.0
+offset_top = -230.0
+offset_right = 800.0
 offset_bottom = -20.0
 
 [node name="CashLabel" type="Label" parent="UI"]
@@ -55,6 +53,11 @@ text = "Rate: 0/s"
 [node name="Buttons" type="HBoxContainer" parent="UI"]
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="MineButton" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 40)
+text = "Mine!"
 
 [node name="UpgradeShaft" type="Button" parent="UI/Buttons"]
 layout_mode = 2
@@ -71,6 +74,17 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 40)
 text = "Upgrade Warehouse"
 
+[node name="HireManager" type="Button" parent="UI"]
+layout_mode = 2
+text = "Hire Shaft Manager"
+
 [node name="MenuButton" type="Button" parent="UI"]
 layout_mode = 2
 text = "Main Menu"
+
+[connection signal="pressed" from="UI/Buttons/MineButton" to="." method="_on_mine_button_pressed"]
+[connection signal="pressed" from="UI/Buttons/UpgradeShaft" to="." method="_on_upgrade_shaft_pressed"]
+[connection signal="pressed" from="UI/Buttons/UpgradeElev" to="." method="_on_upgrade_elev_pressed"]
+[connection signal="pressed" from="UI/Buttons/UpgradeWare" to="." method="_on_upgrade_ware_pressed"]
+[connection signal="pressed" from="UI/HireManager" to="." method="_on_hire_manager_pressed"]
+[connection signal="pressed" from="UI/MenuButton" to="." method="_on_menu_button_pressed"]
