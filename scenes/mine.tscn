@@ -9,41 +9,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_mine")
 
-[node name="MineBackground" type="TextureRect" parent="."]
+[node name="MineBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-expand_mode = 1
-stretch_mode = 5
-# Assign res://assets/mine_shafts_bg.png here
+color = Color(0.12, 0.08, 0.06, 1)
 
-[node name="Warehouse" type="TextureRect" parent="."]
+[node name="ShaftsLayer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -300.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 200.0
-# Assign res://assets/warehouse.png
-
-[node name="Elevator" type="TextureRect" parent="."]
-layout_mode = 1
-offset_left = 40.0
-offset_top = 180.0
-offset_right = 140.0
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 900.0
 offset_bottom = 600.0
-# Assign res://assets/elevator.png
 
-[node name="Miner1" type="TextureRect" parent="."]
-layout_mode = 1
-offset_left = 200.0
-offset_top = 250.0
-offset_right = 320.0
-offset_bottom = 370.0
-# Assign res://assets/miner.png
+[node name="Miner" type="Sprite2D" parent="."]
+position = Vector2(400, 320)
+scale = Vector2(0.4, 0.4)
+# Assign texture = preload("res://assets/miner_idle.png") once added
+
+[node name="Cart" type="Sprite2D" parent="."]
+position = Vector2(250, 350)
+scale = Vector2(0.3, 0.3)
+# Assign cart texture
 
 [node name="UI" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -51,8 +39,8 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -200.0
-offset_right = 400.0
+offset_top = -180.0
+offset_right = 500.0
 offset_bottom = -20.0
 
 [node name="CashLabel" type="Label" parent="UI"]
@@ -66,17 +54,21 @@ text = "Rate: 0/s"
 
 [node name="Buttons" type="HBoxContainer" parent="UI"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="UpgradeShaft" type="Button" parent="UI/Buttons"]
 layout_mode = 2
+custom_minimum_size = Vector2(140, 40)
 text = "Upgrade Shaft"
 
 [node name="UpgradeElev" type="Button" parent="UI/Buttons"]
 layout_mode = 2
+custom_minimum_size = Vector2(140, 40)
 text = "Upgrade Elevator"
 
 [node name="UpgradeWare" type="Button" parent="UI/Buttons"]
 layout_mode = 2
+custom_minimum_size = Vector2(140, 40)
 text = "Upgrade Warehouse"
 
 [node name="MenuButton" type="Button" parent="UI"]

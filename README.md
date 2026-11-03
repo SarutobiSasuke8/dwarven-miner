@@ -2,44 +2,37 @@
 
 Idle Miner Tycoon-style game with a dwarven theme. Built in Godot 4.
 
-Classic loop: **Mine Shafts** → **Elevator** → **Warehouse** (with bottlenecks).
+## Usable Art Assets
+The generated sprites are usable in Godot but are currently JPGs with checkerboard backgrounds.
+For best results (especially animation):
+1. Open the images in an editor (or use remove.bg / Photoshop / GIMP)
+2. Remove the checkerboard to make true transparent PNGs
+3. Save as PNG and drop into `assets/`
+4. Assign to the Sprite2D / TextureRect nodes
 
-## Features in this slice
-- Main Menu scene
-- Visual mine layout scaffolding (TextureRects ready for art)
-- Core pipeline (shafts / elevator / warehouse)
-- Managers + automation
-- Idle cash
-- Upgrades
-- Generated art assets ready to drop into `assets/`:
-  - `miner.png` (dwarf character)
-  - `mine_shafts_bg.png` (underground levels)
-  - `elevator.png`
-  - `warehouse.png` (surface forge)
-  - `ui_button.png`
+Recommended assets to prepare:
+- `miner_idle.png` (standing pose)
+- `miner_swing.png` (pickaxe raised — for 2-frame animation)
+- `cart.png` (mine cart / elevator)
+- `mine_bg.png` (background)
+- `ui_panel.png` (for buttons / panels)
+
+These are simple enough for AnimatedSprite2D (2 frames) or code-driven tweens (bob, swing, move).
+
+## Current Features
+- Main Menu
+- Mine scene with Sprite2D miner ready for animation
+- Simple mining bob / swing scaffolding in code
+- Core loop (shafts → elevator → warehouse)
+- Managers, idle cash, upgrades
 
 ## How to run
-1. Clone and open in **Godot 4.x**
-2. Place the generated art files into the `assets/` folder (create it if needed)
-3. In the Godot editor, reimport or drag the textures onto the TextureRect nodes in `scenes/mine.tscn`
-4. Press F5 (starts at Main Menu)
+1. Open in Godot 4.x
+2. Add transparent PNG assets to `assets/` and assign them
+3. Play from Main Menu
 
-## Art assets generated
-The following were created and should be added to `res://assets/`:
-- Miner sprite (side view, pickaxe)
-- Mine shaft background (multi-level stone + glowing ore)
-- Elevator cart with dwarf
-- Surface warehouse / forge building
-- Wooden UI button style
-
-## Roadmap
-- [x] Core loop
-- [x] Menus
-- [x] Art asset generation + scaffolding
-- [ ] Full visual integration + animations
-- [ ] Super Managers
-- [ ] Continents / Prestige / Research
-- [ ] Suno audio
-- [ ] Polish for portals / mobile
-
-Built for browser HTML5 export + future native mobile.
+## Next
+- Wire real AnimatedSprite2D frames
+- Elevator movement
+- More shafts visuals
+- Super Managers, etc.

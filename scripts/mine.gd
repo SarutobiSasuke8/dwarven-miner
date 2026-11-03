@@ -2,15 +2,33 @@ extends Control
 
 @onready var cash_label: Label = $UI/CashLabel
 @onready var rate_label: Label = $UI/RateLabel
+@onready var miner: Sprite2D = $Miner
+
+var mining_time: float = 0.0
+var is_mining: bool = true
 
 func _ready() -> void:
 	update_ui()
+	# Simple placeholder color so you can see the miner even without texture
+	if miner.texture == null:
+		var img = Image.create(128, 192, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0.8, 0.6, 0.2))
+		miner.texture = ImageTexture.create_from_image(img)
 
 func _process(delta: float) -> void:
 	var rate = GameState.get_bottlenecked_rate()
 	if GameState.managers_hired.get("shafts", false) and GameState.managers_hired.get("elevator", false) and GameState.managers_hired.get("warehouse", false):
 		GameState.cash += rate * delta
 		GameState.idle_rate = rate
+
+	# Simple mining animation (bob + slight swing) — easy to replace with AnimatedSprite2D later
+	if is_mining and miner:
+		mining_time += delta
+		var bob = sin(mining_time * 4.0) * 4.0
+		var swing = sin(mining_time * 3.0) * 0.05
+		miner.position.y = 320 + bob
+		miner.rotation = swing
+
 	update_ui()
 
 func update_ui() -> void:
