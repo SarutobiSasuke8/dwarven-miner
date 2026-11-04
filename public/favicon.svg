@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Dwarven Miner">
+  <rect width="32" height="32" rx="6" fill="#140e0a"/>
+  <path d="M5.5 14.2 L16 6.4 L26.5 14.2 L22.2 14.2 L16 10.2 L9.8 14.2 Z" fill="#e6a23c"/>
+  <path d="M14.4 12.6 L17.6 12.6 L19.4 26.2 L15.8 26.2 Z" fill="#f3e4c4"/>
+  <circle cx="24.2" cy="18.4" r="2.3" fill="#d45a2a"/>
+</svg>

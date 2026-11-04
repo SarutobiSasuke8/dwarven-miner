@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #140e0a;
+  --color-surface: #2c1d14;
+  --color-fg: #f3e4c4;
+  --color-gold: #e6a23c;
+  --color-ember: #d45a2a;
+  --color-muted: color-mix(in srgb, #f3e4c4 68%, #140e0a);
+  --color-line: color-mix(in srgb, #e6a23c 32%, #2c1d14);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --radius-panel: 1.15rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-pop {
+    animation: none;
+  }
+}
