@@ -19,7 +19,7 @@ Classic Idle Miner Tycoon loop with dwarven theme, built in Godot 4.
 - [ ] Wire real AnimatedSprite2D frames for miner (replace bob/swing with 2-frame idle/swing)
 - [ ] More shafts visuals (populate ShaftsLayer with visual ore veins or ColorRects)
 - [ ] Super Managers / prestige system (gems, permanent upgrades)
-- [ ] Multiple shaft upgrade buttons that unlock properly in UI
+- [x] Four vein controls in the playable mine. Reach level 5 in one vein to open the next for 10 cash.
 - [ ] Sound effects and better art pipeline (transparent PNGs)
 - [ ] Offline progress polish and notifications
 - [ ] Balance pass on costs and rates after playtesting

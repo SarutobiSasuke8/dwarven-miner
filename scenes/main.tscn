@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwarvenminer"]
+[gd_scene load_steps=3 format=3 uid="uid://dwarvenminer"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/shaft_upgrades.tscn" id="2_shafts"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -35,7 +36,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 120)
 text = "TAP TO MINE (or hire managers)"
 
-[node name="Shafts" type="VBoxContainer" parent="VBox"]
+[node name="Shafts" parent="VBox" instance=ExtResource("2_shafts")]
 layout_mode = 2
 
 [node name="ElevatorButton" type="Button" parent="VBox"]
