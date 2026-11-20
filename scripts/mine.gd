@@ -4,7 +4,6 @@ extends Control
 @onready var rate_label: Label = $UI/RateLabel
 @onready var miner: Sprite2D = $Miner
 @onready var cart: Sprite2D = $Cart
-@onready var shaft_button: Button = $UI/Buttons/UpgradeShaft
 @onready var elev_button: Button = $UI/Buttons/UpgradeElev
 @onready var ware_button: Button = $UI/Buttons/UpgradeWare
 @onready var manager_button: Button = $UI/HireManager
@@ -66,8 +65,9 @@ func _process(delta: float) -> void:
 
 func update_ui() -> void:
 	cash_label.text = "Cash: %s" % format_number(GameState.cash)
-	rate_label.text = "Rate: %s/s" % format_number(GameState.get_bottlenecked_rate())
-	shaft_button.text = "Shaft Lv %d (%s)" % [GameState.shafts[0].level, format_number(10.0 * pow(1.25, GameState.shafts[0].level))]
+	rate_label.text = "Delivery %s/s    ·    Shafts %s/s    Elevator %s/s    Warehouse %s/s" % [
+		format_number(GameState.get_bottlenecked_rate()), format_number(GameState.get_total_shaft_rate()),
+		format_number(GameState.get_elevator_rate()), format_number(GameState.get_warehouse_rate())]
 	elev_button.text = "Elevator Lv %d (%s)" % [GameState.elevator_level, format_number(50.0 * pow(1.3, GameState.elevator_level))]
 	ware_button.text = "Warehouse Lv %d (%s)" % [GameState.warehouse_level, format_number(50.0 * pow(1.3, GameState.warehouse_level))]
 	var next = next_manager()
@@ -106,14 +106,6 @@ func _on_hire_manager_pressed() -> void:
 	if GameState.cash >= MANAGER_COSTS[next]:
 		GameState.cash -= MANAGER_COSTS[next]
 		GameState.managers_hired[next] = true
-
-func _on_upgrade_shaft_pressed() -> void:
-	var shaft = GameState.shafts[0]
-	var cost = 10.0 * pow(1.25, shaft.level)
-	if GameState.cash >= cost:
-		GameState.cash -= cost
-		shaft.level += 1
-		GameState.shafts[0] = shaft
 
 func _on_upgrade_elev_pressed() -> void:
 	var cost = 50.0 * pow(1.3, GameState.elevator_level)

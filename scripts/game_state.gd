@@ -12,6 +12,7 @@ var warehouse_level: int = 1
 var managers_hired: Dictionary = {"shafts": false, "elevator": false, "warehouse": false}
 
 const SAVE_PATH = "user://dwarven_miner.save"
+const SHAFT_UNLOCK_LEVEL := 5
 
 func _ready() -> void:
 	initialize_mine()
@@ -30,6 +31,26 @@ func get_shaft_rate(shaft: Dictionary) -> float:
 	if not shaft.unlocked or shaft.level <= 0:
 		return 0.0
 	return shaft.base_rate * pow(1.15, shaft.level - 1)
+
+func get_shaft_upgrade_cost(index: int) -> float:
+	return 10.0 * pow(1.25, shafts[index].level)
+
+func try_upgrade_shaft(index: int) -> bool:
+	if index < 0 or index >= shafts.size() or not shafts[index].unlocked:
+		return false
+	var cost := get_shaft_upgrade_cost(index)
+	if cash < cost:
+		return false
+	cash -= cost
+	shafts[index].level += 1
+	refresh_shaft_unlocks()
+	return true
+
+func refresh_shaft_unlocks() -> void:
+	for index in range(1, shafts.size()):
+		var previous: Dictionary = shafts[index - 1]
+		if previous.unlocked and previous.level >= SHAFT_UNLOCK_LEVEL:
+			shafts[index].unlocked = true
 
 func get_elevator_rate() -> float:
 	return 10.0 * pow(1.12, elevator_level - 1)
@@ -83,6 +104,7 @@ func load_game() -> void:
 		elevator_level = data.get("elevator_level", 1)
 		warehouse_level = data.get("warehouse_level", 1)
 		shafts = data.get("shafts", shafts)
+		refresh_shaft_unlocks()
 		managers_hired = data.get("managers_hired", managers_hired)
 		last_save_time = data.get("last_save_time", 0)
 

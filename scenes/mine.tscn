@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://minesce"]
+[gd_scene load_steps=3 format=3 uid="uid://minesce"]
 
 [ext_resource type="Script" path="res://scripts/mine.gd" id="1_mine"]
+[ext_resource type="PackedScene" path="res://scenes/shaft_upgrades.tscn" id="2_shafts"]
 
 [node name="Mine" type="Control"]
 layout_mode = 3
@@ -16,12 +17,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.12, 0.08, 0.06, 1)
 
-[node name="ShaftsLayer" type="VBoxContainer" parent="."]
+[node name="ShaftsLayer" parent="." instance=ExtResource("2_shafts")]
 layout_mode = 1
-offset_left = 160.0
-offset_top = 160.0
-offset_right = 900.0
-offset_bottom = 600.0
+anchor_left = 0.50
+anchor_right = 1.0
+offset_top = 120.0
+offset_right = -32.0
 
 [node name="Miner" type="Sprite2D" parent="."]
 position = Vector2(400, 320)
@@ -59,11 +60,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 40)
 text = "Mine!"
 
-[node name="UpgradeShaft" type="Button" parent="UI/Buttons"]
-layout_mode = 2
-custom_minimum_size = Vector2(140, 40)
-text = "Upgrade Shaft"
-
 [node name="UpgradeElev" type="Button" parent="UI/Buttons"]
 layout_mode = 2
 custom_minimum_size = Vector2(140, 40)
@@ -83,7 +79,6 @@ layout_mode = 2
 text = "Main Menu"
 
 [connection signal="pressed" from="UI/Buttons/MineButton" to="." method="_on_mine_button_pressed"]
-[connection signal="pressed" from="UI/Buttons/UpgradeShaft" to="." method="_on_upgrade_shaft_pressed"]
 [connection signal="pressed" from="UI/Buttons/UpgradeElev" to="." method="_on_upgrade_elev_pressed"]
 [connection signal="pressed" from="UI/Buttons/UpgradeWare" to="." method="_on_upgrade_ware_pressed"]
 [connection signal="pressed" from="UI/HireManager" to="." method="_on_hire_manager_pressed"]

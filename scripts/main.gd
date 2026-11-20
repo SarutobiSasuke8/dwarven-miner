@@ -2,7 +2,6 @@ extends Control
 
 @onready var cash_label: Label = $VBox/CashLabel
 @onready var rate_label: Label = $VBox/RateLabel
-@onready var shaft_container: VBoxContainer = $VBox/Shafts
 @onready var elev_button: Button = $VBox/ElevatorButton
 @onready var ware_button: Button = $VBox/WarehouseButton
 @onready var manager_button: Button = $VBox/ManagerButton
@@ -37,20 +36,6 @@ func update_ui() -> void:
 	elev_button.text = "Elevator Lv %d  (%.1f/s)" % [GameState.elevator_level, GameState.get_elevator_rate()]
 	ware_button.text = "Warehouse Lv %d  (%.1f/s)" % [GameState.warehouse_level, GameState.get_warehouse_rate()]
 
-	# Refresh shaft buttons
-	for child in shaft_container.get_children():
-		child.queue_free()
-	for i in GameState.shafts.size():
-		var shaft = GameState.shafts[i]
-		var btn = Button.new()
-		if shaft.unlocked:
-			btn.text = "%s  Lv %d  (%.1f/s)" % [shaft.name, shaft.level, GameState.get_shaft_rate(shaft)]
-			btn.pressed.connect(upgrade_shaft.bind(i))
-		else:
-			btn.text = "Unlock %s (requires previous)" % shaft.name
-			btn.disabled = true
-		shaft_container.add_child(btn)
-
 func format_number(n: float) -> String:
 	if n < 1000:
 		return "%.1f" % n
@@ -64,17 +49,6 @@ func format_number(n: float) -> String:
 func _on_mine_area_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		tap_timer = 5.0  # 5 second boost from tapping
-
-func upgrade_shaft(index: int) -> void:
-	var shaft = GameState.shafts[index]
-	var cost = 10.0 * pow(1.25, shaft.level)
-	if GameState.cash >= cost:
-		GameState.cash -= cost
-		shaft.level += 1
-		# Unlock next shaft at level 5
-		if shaft.level >= 5 and index + 1 < GameState.shafts.size():
-			GameState.shafts[index + 1].unlocked = true
-		GameState.shafts[index] = shaft
 
 func _on_elevator_button_pressed() -> void:
 	var cost = 50.0 * pow(1.3, GameState.elevator_level)
